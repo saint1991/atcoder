@@ -40,6 +40,49 @@ func Abs(n int) int {
 	return n
 }
 
+func Gcd(a, b int) int {
+	if b == 0 {
+		return a
+	}
+	return Gcd(b, a%b)
+}
+
+func IsPrime(n int) bool {
+	for i := 2; i * i < n; i++ {
+		if n % i == 0 {
+			return false
+		}
+	}
+	return n != 1
+}
+
+func Devisors(n int) []int {
+	ret := make([]int, 0)
+	for i := 1; i * i <= n; i++ {
+		if n % i == 0 {
+			ret = append(ret, i)
+			if i != n / i {
+				ret = append(ret, n / i)
+			}
+		}
+	}
+	return ret
+}
+
+func PrimeFactor(n int) map[int]int {
+	ret := make(map[int]int, 0)
+	for i := 2; i * i <= n; i++ {
+		for n % i == 0 {
+			ret[i] += 1
+			n /= i
+		}
+	}
+	if n != 1 {
+		ret[n] = 1
+	}
+	return ret
+}
+
 func ToBinary(num int) string {
 	return fmt.Sprintf("%b", num)
 }
